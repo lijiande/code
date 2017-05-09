@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/code_db?characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      idle-timeout: 10000
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+  application:
+    name: code-service
+mybatis:
+  mapper-locations: classpath:cn/finte/code/service/mapper/xml/*Mapper.xml
+  type-aliases-package: cn.finte.code.entity
+server:
+  port: 10086
+
+

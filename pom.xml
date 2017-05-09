@@ -90,7 +90,6 @@
                     <include>**/*.woff</include>
                     <include>**/*.woff2</include>
                     <include>**/*.ico</include>
-                    <include>**/*.yml</include>
                 </includes>
             </resource>
         </resources>
