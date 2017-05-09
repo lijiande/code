@@ -4,6 +4,7 @@ import cn.finte.code.core.model.BaseObject;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 
 import java.util.Date;
 
@@ -13,32 +14,42 @@ import java.util.Date;
 @TableName(value = "user")
 public class User extends BaseObject {
 
-    @TableId(value = "id")
+    public static final String ID = "id";
+    @TableId(value = ID,type = IdType.UUID)
     private String id;
 
-    @TableField(value = "user_name")
+    public static final String USER_NAME = "user_name";
+    @TableField(value = USER_NAME)
     private String userName;
 
-    @TableField(value = "nick")
+    public static final String NICK = "nick";
+    @TableField(value = NICK)
     private String nick;
 
-    @TableField(value = "password")
+    public static final String PASSWORD = "password";
+    @TableField(value = PASSWORD)
     private String password;
 
-    @TableField(value = "icon")
+    public static final String ICON = "icon";
+    @TableField(value = ICON)
     private String icon;
 
-    @TableField(value = "create_time")
+    public static final String CREATE_TIME = "create_time";
+    @TableField(value = CREATE_TIME)
     private Date createTime;
 
-    @TableField(value = "score")
+    public static final String SCORE = "score";
+    @TableField(value = SCORE)
     private Integer score;
 
-    @TableField(value = "token")
+    public static final String TOKEN = "token";
+    @TableField(value = TOKEN)
     private String token;
 
-    @TableField(value = "finger")
+    public static final String FINGER = "finger";
+    @TableField(value = FINGER)
     private String finger;
+
 
     public String getId() {
         return id;
