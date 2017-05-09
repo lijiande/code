@@ -15,4 +15,18 @@ $ git config user.email "github@xx.com"
 $ git config --list
 ````
 
-3. 
+3. 上传本地代码到github
+
+- 在github创建仓库
+- 增加`.gitignore`文件到根目录
+- 本地项目文件夹内初始化git：`$ git init`
+- 修改`user.name` 和`user.email`(非必须)
+- 绑定github 的`url`,`$git remote add origin [url]`
+- 更新代码至本地，`$ git pull`
+- 处理冲突代码(有则改之)
+- 检查一下`$ git status`
+- 增加到暂存区`$ git add [dir/file/.]`
+- 提交暂存到本地仓库`$ git commit -m "message"`
+- 提交到远程仓库`$ git push origin master`
+
+
