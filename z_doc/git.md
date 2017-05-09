@@ -29,4 +29,12 @@ $ git config --list
 - 提交暂存到本地仓库`$ git commit -m "message"`
 - 提交到远程仓库`$ git push origin master`
 
+4. 增加到暂存
+- 增加文件`$ git add [file]`
+- 增加目录`$ git add [dir]`
+- 增加所有`$ git add .`
 
+5. 恢复`$ git add .` 的文件
+- 恢复所有`$ git reset HEAD`
+- 恢复指定文件`$ git reset HEAD [file]`或`$ git reset [file]`
+- 恢复指定文件夹`$ git reset HEAD [dir]`或`$ git reset [dir]`

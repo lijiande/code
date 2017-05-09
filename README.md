@@ -1,7 +1,12 @@
 # code
 
-使用spring-boot、mybatis-plus。     
-this project is a practice.
+使用spring-boot、mybatis-plus。
+     
+> Desc: this project is a practice.  
+> Note: z_doc
+
+将问题写在前面 
+----
 
 1. 不能够使用`yml`配置文件,比较令人费解。。。     
 报错：`no profiles are currently active`
