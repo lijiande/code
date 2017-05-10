@@ -6,9 +6,23 @@ import cn.finte.code.service.service.CodeService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Created by lijian on 2017/5/10.
  */
 @Service("codeService")
 public class CodeServiceImpl extends ServiceImpl<CodeMapper,Code> implements CodeService {
+
+    @Override
+    public Code encoder(Code code) {
+        return code;
+    }
+
+    @Override
+    public Code init(Code code) {
+        code.setCreateTime(new Date());
+        code.setModifyTime(new Date());
+        return code;
+    }
 }

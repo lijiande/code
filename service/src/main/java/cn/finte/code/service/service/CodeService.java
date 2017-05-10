@@ -8,4 +8,8 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface CodeService extends IService<Code> {
 
+    Code encoder(Code code);
+
+    Code init(Code code);
+
 }
