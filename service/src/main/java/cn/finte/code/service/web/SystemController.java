@@ -55,7 +55,7 @@ public class SystemController {
             if(userService.matchPassword(condition.getPassword(),user.getPassword())){
                 return new Result(Result.ReturnValue.SUCCESS,"");
             }
-            return new Result(Result.ReturnValue.FAILURE,"密码错误");
+            return new Result(Result.ReturnValue.FAILURE,Constants.ERROR,"密码错误");
         }catch (Exception e){
             log.error(e.getMessage(),e);
             return new Result(Result.ReturnValue.FAILURE, Constants.ERROR);
@@ -86,7 +86,7 @@ public class SystemController {
             if(result){
                 return new Result(Result.ReturnValue.SUCCESS,"");
             }
-            return new Result(Result.ReturnValue.FAILURE, Constants.ERROR,result);
+            return new Result(Result.ReturnValue.FAILURE, Constants.ERROR,"注册失败");
         }catch (Exception e) {
             log.error(e.getMessage(),e);
             return new Result(Result.ReturnValue.FAILURE, Constants.ERROR);
