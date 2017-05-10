@@ -4,6 +4,7 @@ import cn.finte.code.core.model.BaseObject;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 
 import java.util.Date;
 
@@ -13,31 +14,49 @@ import java.util.Date;
 @TableName(value = "code")
 public class Code extends BaseObject{
 
-    @TableId(value = "id")
+    /*主键*/
+    public static final String ID = "id";
+    @TableId(value = ID,type = IdType.UUID)
     private String id;
 
-    @TableField(value = "user_id")
+    /*用户ID*/
+    public static final String USER_ID = "user_id";
+    @TableField(value = USER_ID)
     private String userId;
 
-    @TableField(value = "name")
+    /*名字*/
+    public static final String NAME = "name";
+    @TableField(value = NAME)
     private String name;
 
-    @TableField(value = "key_word")
+    /*键*/
+    public static final String KEY_WORD = "key_word";
+    @TableField(value = KEY_WORD)
     private String keyWord;
 
-    @TableField(value = "value_word")
+    /*值*/
+    public static final String VALUE_WORD = "value_word";
+    @TableField(value = VALUE_WORD)
     private String valueWord;
 
-    @TableField(value = "create_time")
+    /*创建时间*/
+    public static final String CREATE_TIME = "create_time";
+    @TableField(value = CREATE_TIME)
     private Date createTime;
 
-    @TableField(value = "modify_time")
+    /*修改时间*/
+    public static final String MODIFY_TIME = "modify_time";
+    @TableField(value = MODIFY_TIME)
     private Date modifyTime;
 
-    @TableField(value = "star")
+    /*星级*/
+    public static final String STAR = "star";
+    @TableField(value = STAR)
     private Integer star;
 
-    @TableField(value = "remark")
+    /*备注*/
+    public static final String REMARK = "remark";
+    @TableField(value = REMARK)
     private String remark;
 
     public String getId() {

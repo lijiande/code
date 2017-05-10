@@ -14,38 +14,47 @@ import java.util.Date;
 @TableName(value = "user")
 public class User extends BaseObject {
 
+    /*主键*/
     public static final String ID = "id";
     @TableId(value = ID,type = IdType.UUID)
     private String id;
 
+    /*用户名*/
     public static final String USER_NAME = "user_name";
     @TableField(value = USER_NAME)
     private String userName;
 
+    /*昵称*/
     public static final String NICK = "nick";
     @TableField(value = NICK)
     private String nick;
 
+    /*密码*/
     public static final String PASSWORD = "password";
     @TableField(value = PASSWORD)
     private String password;
 
+    /*头像*/
     public static final String ICON = "icon";
     @TableField(value = ICON)
     private String icon;
 
+    /*创建时间*/
     public static final String CREATE_TIME = "create_time";
     @TableField(value = CREATE_TIME)
     private Date createTime;
 
+    /*积分*/
     public static final String SCORE = "score";
     @TableField(value = SCORE)
     private Integer score;
 
+    /*token*/
     public static final String TOKEN = "token";
     @TableField(value = TOKEN)
     private String token;
 
+    /*手势*/
     public static final String FINGER = "finger";
     @TableField(value = FINGER)
     private String finger;
