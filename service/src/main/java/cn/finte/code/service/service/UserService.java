@@ -9,4 +9,8 @@ import com.baomidou.mybatisplus.service.IService;
 public interface UserService extends IService<User> {
 
     Boolean matchPassword (String password ,String source);
+
+    String encoder (String password);
+
+    String addSalt (String str);
 }

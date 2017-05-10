@@ -1,6 +1,6 @@
 package cn.finte.code.service.web;
 
-import cn.finte.code.core.model.Constants;
+import cn.finte.code.core.config.Constants;
 import cn.finte.code.core.model.Result;
 import cn.finte.code.entity.user.User;
 import cn.finte.code.service.model.condition.LoginCondition;
@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,9 +36,9 @@ public class SystemController {
     @Inject
     private UserService userService;
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ApiOperation(value = "登录", notes = "登录操作")
-    public Result login(LoginCondition condition){
+    public Result login(@Validated @RequestBody LoginCondition condition){
         try {
             if(Objects.isNull(condition)){
                 return new Result(Result.ReturnValue.FAILURE, Constants.ERROR);
@@ -48,6 +49,9 @@ public class SystemController {
             EntityWrapper<User> ew = new EntityWrapper<>();
             ew.eq(User.USER_NAME,condition.getUserName());
             User user = userService.selectOne(ew);
+            if(Objects.isNull(user)){
+                return new Result(Result.ReturnValue.FAILURE,"该用户不存在");
+            }
             if(userService.matchPassword(condition.getPassword(),user.getPassword())){
                 return new Result(Result.ReturnValue.SUCCESS,"");
             }
@@ -61,7 +65,7 @@ public class SystemController {
 
     @RequestMapping(value = "/regist",method = RequestMethod.POST)
     @ApiOperation(value = "注册", notes = "注册")
-    public Result regist(@RequestBody RegistCondition condition){
+    public Result regist(@Validated @RequestBody RegistCondition condition){
         try {
             if(!condition.isPassValited()){
                 return new Result(Result.ReturnValue.FAILURE,Constants.PARAM_INCOMPLETE);
@@ -74,6 +78,7 @@ public class SystemController {
             }
             User user = new User();
             BeanUtils.copyProperties(condition,user);
+            user.setPassword(userService.encoder(user.getPassword()));
             user.setCreateTime(new Date());
             user.setScore(0);
             user.setToken(UUID.randomUUID().toString());
