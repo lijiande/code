@@ -7,4 +7,6 @@ import com.baomidou.mybatisplus.service.IService;
  * Created by lijian on 2017/5/5.
  */
 public interface UserService extends IService<User> {
+
+    Boolean matchPassword (String password ,String source);
 }

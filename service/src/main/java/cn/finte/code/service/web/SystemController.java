@@ -48,7 +48,7 @@ public class SystemController {
             EntityWrapper<User> ew = new EntityWrapper<>();
             ew.eq(User.USER_NAME,condition.getUserName());
             User user = userService.selectOne(ew);
-            if(Objects.equals(user.getPassword(),condition.getPassword())){
+            if(userService.matchPassword(condition.getPassword(),user.getPassword())){
                 return new Result(Result.ReturnValue.SUCCESS,"");
             }
             return new Result(Result.ReturnValue.FAILURE,"密码错误");
