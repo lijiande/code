@@ -4,6 +4,7 @@ import cn.finte.code.core.config.Constants;
 import cn.finte.code.entity.user.User;
 import cn.finte.code.service.mapper.UserMapper;
 import cn.finte.code.service.service.UserService;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,5 +33,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     @Override
     public String addSalt(String str) {
         return str.concat(Constants.SALT);
+    }
+
+    @Override
+    public User getUserByToken(String token) {
+        EntityWrapper<User> ew = new EntityWrapper<>();
+        ew.eq("",token);
+//        selectOne(new EntityWrapper<>());
+        return null;
     }
 }

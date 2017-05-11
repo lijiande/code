@@ -3,6 +3,7 @@ package cn.finte.code.service.web;
 import cn.finte.code.core.config.Constants;
 import cn.finte.code.core.model.Result;
 import cn.finte.code.entity.data.Code;
+import cn.finte.code.service.config.BaseController;
 import cn.finte.code.service.model.condition.CodeCondition;
 import cn.finte.code.service.service.CodeService;
 import io.swagger.annotations.Api;
@@ -11,10 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 
@@ -24,7 +22,7 @@ import javax.inject.Inject;
 @RestController
 @RequestMapping("/api/dataController")
 @Api(value = "数据操作",description = "数据操作")
-public class DataController {
+public class DataController extends BaseController{
 
     private final Logger log = LoggerFactory.getLogger(DataController.class);
 
@@ -34,7 +32,7 @@ public class DataController {
 
     @RequestMapping(value = "/saveData",method = RequestMethod.POST)
     @ApiOperation(value = "保存数据",notes = "保存数据")
-    public Result saveCode(@Validated @RequestBody CodeCondition condition){
+    public Result saveCode(@Validated @RequestBody CodeCondition condition, @RequestHeader(value = "x-token") String token){
         try {
             Code code = new Code();
             BeanUtils.copyProperties(condition,code);
@@ -53,13 +51,13 @@ public class DataController {
 
     @RequestMapping(value = "/findByPage",method = RequestMethod.GET)
     @ApiOperation(value = "分页查询",notes = "分页查询")
-    public Result findByPage() {
+    public Result findByPage(@RequestHeader(value = "x-token") String token) {
         return null;
     }
 
     @RequestMapping(value = "/delete",method = RequestMethod.DELETE)
     @ApiOperation(value = "删除操作",notes = "删除操作")
-    public Result delete(String id) {
+    public Result delete(@RequestParam String id, @RequestHeader(value = "x-token") String token) {
         try {
             Boolean result = codeService.deleteById(id);
             if(result){

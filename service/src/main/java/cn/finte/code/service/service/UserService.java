@@ -13,4 +13,6 @@ public interface UserService extends IService<User> {
     String encoder (String password);
 
     String addSalt (String str);
+
+    User getUserByToken (String token);
 }
