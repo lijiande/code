@@ -38,3 +38,6 @@ $ git config --list
 - 恢复所有`$ git reset HEAD`
 - 恢复指定文件`$ git reset HEAD [file]`或`$ git reset [file]`
 - 恢复指定文件夹`$ git reset HEAD [dir]`或`$ git reset [dir]`
+
+6. 
+- git branch --set-upstream-to origin/master master
