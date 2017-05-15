@@ -5,6 +5,7 @@ import cn.finte.code.core.model.Result;
 import cn.finte.code.entity.user.User;
 import cn.finte.code.service.model.condition.LoginCondition;
 import cn.finte.code.service.model.condition.RegistCondition;
+import cn.finte.code.service.model.result.LoginResult;
 import cn.finte.code.service.service.UserService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import io.swagger.annotations.Api;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -38,7 +41,7 @@ public class SystemController {
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ApiOperation(value = "登录", notes = "登录操作")
-    public Result login(@Validated @RequestBody LoginCondition condition){
+    public Result login(HttpServletRequest request, @Validated @RequestBody LoginCondition condition){
         try {
             if(Objects.isNull(condition)){
                 return new Result(Result.ReturnValue.FAILURE, Constants.ERROR);
@@ -52,10 +55,19 @@ public class SystemController {
             if(Objects.isNull(user)){
                 return new Result(Result.ReturnValue.FAILURE,"该用户不存在");
             }
-            if(userService.matchPassword(condition.getPassword(),user.getPassword())){
-                return new Result(Result.ReturnValue.SUCCESS,"");
+            if(!userService.matchPassword(condition.getPassword(),user.getPassword())){
+                return new Result(Result.ReturnValue.FAILURE,Constants.ERROR,"密码错误");
             }
-            return new Result(Result.ReturnValue.FAILURE,Constants.ERROR,"密码错误");
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
+            userService.updateById(user);
+            HttpSession session = request.getSession();
+            session.setAttribute(Constants.SESSION_ATT,user.getId());
+            session.setMaxInactiveInterval(Constants.SESSION_TIME);
+
+            LoginResult result = new LoginResult();
+            result.setX(token);
+            return new Result(Result.ReturnValue.SUCCESS,"",result);
         }catch (Exception e){
             log.error(e.getMessage(),e);
             return new Result(Result.ReturnValue.FAILURE, Constants.ERROR);
