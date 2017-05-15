@@ -17,3 +17,4 @@
     - 主application.yml 的spring.profiles.active诡异地需要@包着...(@﹏@)~ 
     同时，也要在pom.xml中，增加profiles
     
+2. 不能读取yml的自定义值
