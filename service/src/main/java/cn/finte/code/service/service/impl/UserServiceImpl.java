@@ -9,10 +9,12 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by lijian on 2017/5/9.
  */
+@Transactional
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
 

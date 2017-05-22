@@ -15,4 +15,6 @@ public class Constants {
     public static final String SESSION_ATT = "userId";
 
     public static final Integer SESSION_TIME = 600;
+
+    public static final String CODE_SIGN = "83bf7840-db11-44d6-9a8c-cf5be8ab7092";
 }

@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by lijian on 2017/5/10.
@@ -32,7 +33,7 @@ public class DataController extends BaseController{
 
     @RequestMapping(value = "/saveData",method = RequestMethod.POST)
     @ApiOperation(value = "保存数据",notes = "保存数据")
-    public Result saveCode(@Validated @RequestBody CodeCondition condition, @RequestHeader(value = "x-token") String token){
+    public Result saveCode(@Validated @RequestBody CodeCondition condition, @RequestHeader(value = Constants.HEADER) String token){
         try {
             Code code = new Code();
             BeanUtils.copyProperties(condition,code);
@@ -57,7 +58,7 @@ public class DataController extends BaseController{
 
     @RequestMapping(value = "/delete",method = RequestMethod.DELETE)
     @ApiOperation(value = "删除操作",notes = "删除操作")
-    public Result delete(@RequestParam String id, @RequestHeader(value = "x-token") String token) {
+    public Result delete(@RequestParam String id, @RequestHeader(value = Constants.HEADER) String token) {
         try {
             Boolean result = codeService.deleteById(id);
             if(result){
@@ -68,6 +69,11 @@ public class DataController extends BaseController{
             log.error(e.getMessage(),e);
             return new Result(Result.ReturnValue.FAILURE, Constants.ERROR);
         }
+    }
 
+    @RequestMapping(value = "/sync",method = RequestMethod.POST)
+    @ApiOperation(value = "app数据同步",notes = "app数据同步")
+    public Result sync(@RequestBody List<Code> codeList){
+        return null;
     }
 }

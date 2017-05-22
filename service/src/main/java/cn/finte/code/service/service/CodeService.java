@@ -12,4 +12,6 @@ public interface CodeService extends IService<Code> {
 
     Code init(Code code);
 
+//    SyncResult sync();
+
 }

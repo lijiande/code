@@ -3,6 +3,7 @@ package cn.finte.code.service.Interceptor;
 import cn.finte.code.core.config.Constants;
 import cn.finte.code.entity.user.User;
 import cn.finte.code.service.service.UserService;
+import org.assertj.core.util.Strings;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,9 +29,6 @@ public class AccessInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         System.out.println("----------------------拦截前");
-        if(true){
-            return true;
-        }
         String requestUri = httpServletRequest.getRequestURI();
         for(String uri : URIS){
             if(Objects.equals(uri,requestUri)){
@@ -38,13 +36,18 @@ public class AccessInterceptor implements HandlerInterceptor {
             }
         }
         String token = httpServletRequest.getHeader(Constants.HEADER);
+        if(Strings.isNullOrEmpty(token))
+            return false;
         HttpSession session = httpServletRequest.getSession();
         String userId = (String) session.getAttribute(Constants.SESSION_ATT);
-        User user = userService.selectById(userId);
-        if(Objects.nonNull(user) && Objects.equals(token,user.getToken())){
-            return true;
+        if(Strings.isNullOrEmpty(userId)){
+            return false;
         }
-        return false;
+        User user = userService.selectById(userId);
+        if(Objects.isNull(user) || !Objects.equals(token,user.getToken())){
+            return false;
+        }
+        return true;
     }
 
     @Override

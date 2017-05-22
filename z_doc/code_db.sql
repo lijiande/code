@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-05-15 18:13:20
+Date: 2017-05-22 11:14:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,8 +20,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `code`;
 CREATE TABLE `code` (
-  `id` varchar(50) NOT NULL COMMENT '主键ID',
-  `user_id` varchar(50) DEFAULT NULL COMMENT '用户ID-外键',
+  `id` varchar(60) NOT NULL COMMENT '主键ID',
+  `user_id` varchar(60) DEFAULT NULL COMMENT '用户ID-外键',
   `name` varchar(100) DEFAULT NULL COMMENT 'code名',
   `key_word` varchar(100) DEFAULT NULL COMMENT 'key键',
   `value_word` varchar(100) DEFAULT NULL COMMENT 'value值',
@@ -29,6 +29,7 @@ CREATE TABLE `code` (
   `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
   `star` int(2) DEFAULT '0' COMMENT '星级',
   `remark` varchar(400) DEFAULT '' COMMENT '备注',
+  `sign` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
