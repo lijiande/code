@@ -193,17 +193,4 @@ public class Code extends BaseObject{
                 ", sign='" + sign + '\'' +
                 '}';
     }
-
-    public enum CodeSign{
-        DELETE("0"),ADD("1");
-        private String value;
-
-        CodeSign(String value){
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
 }
