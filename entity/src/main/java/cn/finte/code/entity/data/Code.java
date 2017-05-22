@@ -59,6 +59,11 @@ public class Code extends BaseObject{
     @TableField(value = REMARK)
     private String remark;
 
+    /*签名*/
+    public static final String SIGN = "sign";
+    @TableField(value = SIGN)
+    private String sign;
+
     public String getId() {
         return id;
     }
@@ -131,6 +136,14 @@ public class Code extends BaseObject{
         this.remark = remark;
     }
 
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -146,7 +159,8 @@ public class Code extends BaseObject{
         if (createTime != null ? !createTime.equals(code.createTime) : code.createTime != null) return false;
         if (modifyTime != null ? !modifyTime.equals(code.modifyTime) : code.modifyTime != null) return false;
         if (star != null ? !star.equals(code.star) : code.star != null) return false;
-        return remark != null ? remark.equals(code.remark) : code.remark == null;
+        if (remark != null ? !remark.equals(code.remark) : code.remark != null) return false;
+        return sign != null ? sign.equals(code.sign) : code.sign == null;
     }
 
     @Override
@@ -160,6 +174,7 @@ public class Code extends BaseObject{
         result = 31 * result + (modifyTime != null ? modifyTime.hashCode() : 0);
         result = 31 * result + (star != null ? star.hashCode() : 0);
         result = 31 * result + (remark != null ? remark.hashCode() : 0);
+        result = 31 * result + (sign != null ? sign.hashCode() : 0);
         return result;
     }
 
@@ -175,6 +190,20 @@ public class Code extends BaseObject{
                 ", modifyTime=" + modifyTime +
                 ", star=" + star +
                 ", remark='" + remark + '\'' +
+                ", sign='" + sign + '\'' +
                 '}';
+    }
+
+    public enum CodeSign{
+        DELETE("0"),ADD("1");
+        private String value;
+
+        CodeSign(String value){
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 }
